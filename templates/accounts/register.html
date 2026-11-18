@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block width %}narrow{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Create an account</h1>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% include "accounts/_form_fields.html" %}
+    <button type="submit" class="btn">Register</button>
+  </form>
+  <p class="muted">Already registered? <a href="{% url 'login' %}">Log in</a></p>
+</div>
+
+<script>
+  const wrap = document.getElementById("wrap-business_name");
+  function toggleBusiness() {
+    const chosen = document.querySelector('input[name="role"]:checked');
+    wrap.style.display = chosen && chosen.value === "Vendor" ? "block" : "none";
+  }
+  document.querySelectorAll('input[name="role"]').forEach(function (r) {
+    r.addEventListener("change", toggleBusiness);
+  });
+  toggleBusiness();
+</script>
+{% endblock %}
