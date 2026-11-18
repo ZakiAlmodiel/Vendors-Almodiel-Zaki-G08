@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+{% block width %}narrow{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>My Profile</h1>
+  <dl class="details">
+    <dt>Name</dt><dd>{{ user.first_name }} {{ user.last_name }}</dd>
+    <dt>Email</dt><dd>{{ user.email }}</dd>
+    <dt>Contact number</dt><dd>{{ user.contact_number|default:"Not set" }}</dd>
+    <dt>Role</dt><dd>{{ user.role }}</dd>
+    {% if vendor %}
+      <dt>Business name</dt><dd>{{ vendor.business_name }}</dd>
+      <dt>Description</dt><dd>{{ vendor.description|default:"Not set" }}</dd>
+    {% endif %}
+  </dl>
+  <a class="btn" href="{% url 'profile_edit' %}">Edit profile</a>
+</div>
+{% endblock %}
